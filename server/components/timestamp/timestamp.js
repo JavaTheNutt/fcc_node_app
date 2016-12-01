@@ -7,7 +7,7 @@ var exports = module.exports = {};
   * @return {Boolean}
   */
 function isValidNumeric(timestamp) {
-    'use strict'
+    'use strict';
     console.log('checking if ' + timestamp +' is a valid 10 digit numeric timestamp');
     //todo: refine regex
     var numericRegex = /^\d{10}$/;
@@ -70,7 +70,44 @@ function numericFormat(timestamp, success, err){
 
     createValidObject(timestamp, formatToMemonic(timestamp), success);
 }
+function getNumericMonth(month, err){
+    'use strict';
+    switch(month){
+        case 'january':
+            return 1;
+        case 'february':
+            return 2;
+        case 'march':
+            return 3;
+        case 'april':
+            return 4;
+        case 'may':
+            return 5;
+        case 'june':
+            return 6;
+        case 'july':
+            return 7;
+        case 'august':
+            return 8;
+        case 'september':
+            return 9;
+        case 'october':
+            return 10;
+        case 'november':
+            return 11;
+        case 'december':
+            return 12;
+        default:
+            createNullTimestampObject('The month specified does not match formal params', err);
+    }
+}
+function memonicFormat(timestamp, success, err) {
+    console.log('timestamp is assumed memonic');
+    console.log('month segment ' + timestamp.substring(0, timestamp.indexOf(' ')).toLowerCase());
+    var month = getNumericMonth(timestamp.substring(0, timestamp.indexOf(' ')).toLowerCase(), err);
 
+    console.log("Month is " + month);
+}
 /**
   * This function will handle all of the initial logic for the timestamp.
   * @param timestamp {string} the timestamp
@@ -86,6 +123,7 @@ function isValidTimestamp(timestamp, success, err){
         numericFormat(timestamp, success, err);
     }else{
         console.log('contains spaces');
+        memonicFormat(timestamp, success, err);
     }
 
 }
