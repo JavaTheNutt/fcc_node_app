@@ -5,15 +5,16 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-/*var index = require('./routes/index');
-var users = require('./routes/users');*/
+//route files
+//var index = require('./components/index/index.route'); //todo: uncomment and test
 var timestamp = require('./components/timestamp/timestamp.route');
 
 var app = express();
 //folders containing view files
 const viewFolders = [
     path.join(__dirname, 'components/shared/'),
-    path.join(__dirname, 'components/timestamp/')
+    path.join(__dirname, 'components/timestamp/')/*,
+    path.join(__dirname, 'components/index/)*/ //todo: uncomment and test
 ];
 // view engine setup
 app.set('views', viewFolders);
@@ -27,7 +28,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
+//define routes
+//app.use('/', index); //todo: uncomment and test
 app.use('/timestamp', timestamp);
 
 // catch 404 and forward to error handler
