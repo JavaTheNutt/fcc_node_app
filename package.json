@@ -14,5 +14,9 @@
     "moment": "^2.17.0",
     "morgan": "~1.7.0",
     "serve-favicon": "~2.3.0"
-  }
+  }/**,
+  "engines":{
+    "node": "INSERT NODE VERSION HERE"
+  }**/
+  //TODO: put in node version for deployment to heroku
 }
