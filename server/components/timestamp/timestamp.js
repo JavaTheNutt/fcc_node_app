@@ -38,6 +38,8 @@ function createNullTimestampObject(error, errorCallback){
 function formatToMemonic(timestamp){
     'use strict';
     var natural = new Date(timestamp*1000);
+    //todo: uncomment and test using moment to parse the timestamp
+    //var natural = moment.unix(timestamp);
     var naturalMoment = moment(natural);
     console.log('natural: ' + natural);
     console.log('naturalMoment: ' + naturalMoment);
@@ -70,6 +72,13 @@ function numericFormat(timestamp, success, err){
 
     createValidObject(timestamp, formatToMemonic(timestamp), success);
 }
+
+/**
+  * This function will take the month and return its numeric value. 
+  * @param month {string} the month in memonic format
+  * @param err {function} the callback to be called if the month is not recognised.
+  * @callback err is the callback passed in by timestamp.route
+  */
 function getNumericMonth(month, err){
     'use strict';
     switch(month){
@@ -101,11 +110,24 @@ function getNumericMonth(month, err){
             createNullTimestampObject('The month specified does not match formal params', err);
     }
 }
+
+/**
+  * This is the function that will be called if the timestamp is assumed to be in memonic form
+  * @param timestamp {string} a timestamp in the format of: MM dd, yyyy
+  * @param success {function} the success callback
+  * @param err {function} the error callback
+  * @callback success the success callback passed in by timestamp.route
+  * @callback err the error callback passed in by timestamp.route
+  */
 function memonicFormat(timestamp, success, err) {
     console.log('timestamp is assumed memonic');
     console.log('month segment ' + timestamp.substring(0, timestamp.indexOf(' ')).toLowerCase());
     var month = getNumericMonth(timestamp.substring(0, timestamp.indexOf(' ')).toLowerCase(), err);
-
+    /*var year = timestamp.substring(timestamp.lastIndeOf(' '));
+    var day = timestamp.substring(timestamp.indexOf(' '), timestamp.indexOf(',') -1);
+    //date should be in the format of dd/mm/yy
+    var ts = moment(day + '/' + month + '/' + year 00:00, D/M/YYYY H:mm).valueOf();
+    console.log(ts)*/
     console.log("Month is " + month);
 }
 /**
@@ -125,7 +147,6 @@ function isValidTimestamp(timestamp, success, err){
         console.log('contains spaces');
         memonicFormat(timestamp, success, err);
     }
-
 }
 
 /**
