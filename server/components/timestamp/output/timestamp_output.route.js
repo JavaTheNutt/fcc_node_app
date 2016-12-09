@@ -10,7 +10,7 @@ router.get('/:stamp', function(req, res, next){
     const params = req.params;
     //todo: rename for clarity
     var object = {};
-    object.title = 'timestamp result';
+    object.title = 'Timestamp -- FCC API Development';
     //todo: break success/error into seperate functions.
     timestamp.getTimeObject(params.stamp, function(data){
         'use strict';

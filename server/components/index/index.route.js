@@ -2,24 +2,8 @@ const express = require('express');
 const router = express.Router();
 
 function renderIndex(req, res, next){
-    var timestampTestUrls = getUrls(true);
-  res.render('index', {});
+  res.render('index', {title: 'Home -- FCC API Development'});
 }
-//fixme build a separate service to deal with data injection for each route
-function getUrls(isDev){
-    'use strict';
-    var devBaseUrl = 'localhost:3000/timestampOut/';
-    var prodBaseUrl = 'https://fathomless-castle-93664.herokuapp.com/timestampOut/';
-    var testUnix = '1450137600';
-    var testMemonic = encodeURI('December 15, 2015');
 
-    var usedUrl = isDev ? devBaseUrl : prodBaseUrl;
-
-    return{
-        'unixUrl': usedUrl + testUnix,
-        'memonicUrl': usedUrl + testMemonic
-    }
-
-}
 router.get('/', renderIndex);
 module.exports = router;
