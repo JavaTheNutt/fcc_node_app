@@ -123,12 +123,14 @@ function memonicFormat(timestamp, success, err) {
     console.log('timestamp is assumed memonic');
     console.log('month segment ' + timestamp.substring(0, timestamp.indexOf(' ')).toLowerCase());
     var month = getNumericMonth(timestamp.substring(0, timestamp.indexOf(' ')).toLowerCase(), err);
-    /*var year = timestamp.substring(timestamp.lastIndeOf(' '));
-    var day = timestamp.substring(timestamp.indexOf(' '), timestamp.indexOf(',') -1);
-    //date should be in the format of dd/mm/yy
-    var ts = moment(day + '/' + month + '/' + year 00:00, D/M/YYYY H:mm).valueOf();
-    console.log(ts)*/
+    var year = timestamp.substring(timestamp.lastIndexOf(' '));
+    console.log('year: ' + year);
+    var day = timestamp.substring(timestamp.indexOf(' '), timestamp.indexOf(','));
+    console.log('day: ' + day);
+    var ts = (moment(day + '/' + month + '/' + year +' 00:00', 'D/M/YYYY H:mm').valueOf())/1000;
+    console.log('unix timestamp: ' + ts);
     console.log("Month is " + month);
+    createValidObject(ts, timestamp, success);
 }
 /**
   * This function will handle all of the initial logic for the timestamp.
