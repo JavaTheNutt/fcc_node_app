@@ -10,7 +10,7 @@ router.get('/:stamp', function(req, res, next){
     const params = req.params;
     //todo: rename for clarity
     var object = {};
-    object.title = 'timestamp';
+    object.title = 'timestamp result';
     //todo: break success/error into seperate functions.
     timestamp.getTimeObject(params.stamp, function(data){
         'use strict';
@@ -23,7 +23,7 @@ router.get('/:stamp', function(req, res, next){
         //todo use promises instead of callbacks
         object.content = obj;
     });
-    res.render('timestamp', object);
+    res.render('timestamp_output', object);
 });
 
 module.exports = router;

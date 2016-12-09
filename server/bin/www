@@ -5,7 +5,7 @@
  */
 
 var app = require('../app');
-var debug = require('debug')('fcc-api-developement:server');
+var debug = require('debug')('fcc-output-developement:server');
 var http = require('http');
 
 /**

@@ -7,14 +7,16 @@ var bodyParser = require('body-parser');
 
 //route files
 var index = require('./components/index/index.route'); //todo: uncomment and test
-var timestamp = require('./components/timestamp/timestamp.route');
+var timestampOut = require('./components/timestamp/output/timestamp_output.route');
+const timestampIn = require('./components/timestamp/input/timestamp_input.route');
 
 var app = express();
 //folders containing view files
 const viewFolders = [
     path.join(__dirname, 'components/shared/'),
-    path.join(__dirname, 'components/timestamp/'),
-    path.join(__dirname, 'components/index/') //todo: uncomment and test
+    path.join(__dirname, 'components/timestamp/output/'),
+    path.join(__dirname, 'components/index/'), //todo: uncomment and test
+    path.join(__dirname, 'components/timestamp/input/')
 ];
 // view engine setup
 app.set('views', viewFolders);
@@ -30,7 +32,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //define routes
 app.use('/', index); //todo: uncomment and test
-app.use('/timestamp', timestamp);
+app.use('/timestamp/input', timestampIn);
+app.use('/timestamp/output', timestampOut);
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

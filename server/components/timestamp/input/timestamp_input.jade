@@ -1,0 +1,13 @@
+extends ../../shared/layout
+block content
+    h2 Timestamp service
+        p To test the timestamp service, append "/timestamp/TIMESTAMP_HERE" to the URL. The timestamp appended to the URL must be either a valid unix timestamp (in seconds), or a date in the format of "memonic month day, year" such as "December 15, 2015". Here are some examples that will work:
+        ul
+            li 1450137600
+            li December 15, 2015
+        a(href="/timestamp/output/1450137600", target="_blank") test timestamp with unix
+        br
+        a(href="/timestamp/output/December%2015,%202015", target="_blank") test timestamp with memonic values
+        br
+        button.btn.btn-danger(type='button') click me
+

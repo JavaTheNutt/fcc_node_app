@@ -8,8 +8,8 @@ function renderIndex(req, res, next){
 //fixme build a separate service to deal with data injection for each route
 function getUrls(isDev){
     'use strict';
-    var devBaseUrl = 'localhost:3000/timestamp/';
-    var prodBaseUrl = 'https://fathomless-castle-93664.herokuapp.com/timestamp/';
+    var devBaseUrl = 'localhost:3000/timestampOut/';
+    var prodBaseUrl = 'https://fathomless-castle-93664.herokuapp.com/timestampOut/';
     var testUnix = '1450137600';
     var testMemonic = encodeURI('December 15, 2015');
 
