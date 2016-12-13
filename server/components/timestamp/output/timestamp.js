@@ -1,19 +1,6 @@
 var moment = require('moment');
+const timestampService = require('./timestamp.service');
 var exports = module.exports = {};
-
-/**
-  * This function takes a timestampOut and ensures that it is a valid number
-  * @param timestamp {string} the timestampOut
-  * @return {Boolean}
-  */
-function isValidNumeric(timestamp) {
-    'use strict';
-    console.log('checking if ' + timestamp +' is a valid 10 digit numeric timestampOut');
-    //todo: refine regex
-    var numericRegex = /^\d{10}$/;
-    return numericRegex.test(timestamp);
-
-}
 
 /**
   * This function will create a null timestampOut object to be returned, along with an error message
@@ -25,25 +12,9 @@ function createNullTimestampObject(error, errorCallback){
     'use strict';
     if(error) console.log(error);
     errorCallback(error, {
-        "unix": null,
-        "natural": null
+        "unix": "null",
+        "natural": "null"
     })
-}
-
-/**
-  * This function takes a valid timestampOut and converts it to a memonic date
-  * @param timestamp {string} the timestampOut
-  * @return {string} the date in memonic form
-  */
-function formatToMemonic(timestamp){
-    'use strict';
-    var natural = new Date(timestamp*1000);
-    //todo: uncomment and test using moment to parse the timestampOut
-    //var natural = moment.unix(timestampOut);
-    var naturalMoment = moment(natural);
-    console.log('natural: ' + natural);
-    console.log('naturalMoment: ' + naturalMoment);
-    return naturalMoment.format('MMMM Do, YYYY');
 }
 
 /**
@@ -67,48 +38,10 @@ function createValidObject(unix, natural, success) {
   */
 function numericFormat(timestamp, success, err){
     'use strict';
-    if(!isValidNumeric(timestamp)) return createNullTimestampObject('Timestamp must be a 10 digit numeric string if it does not contain spaces', err);
+    if(!timestampService.isValidNumeric(timestamp)) return createNullTimestampObject('Timestamp must be a 10 digit numeric string if it does not contain spaces', err);
     console.log('timestampOut is valid numeric');
 
-    createValidObject(timestamp, formatToMemonic(timestamp), success);
-}
-
-/**
-  * This function will take the month and return its numeric value. 
-  * @param month {string} the month in memonic format
-  * @param err {function} the callback to be called if the month is not recognised.
-  * @callback err is the callback passed in by timestampOut.route
-  */
-function getNumericMonth(month, err){
-    'use strict';
-    switch(month){
-        case 'january':
-            return 1;
-        case 'february':
-            return 2;
-        case 'march':
-            return 3;
-        case 'april':
-            return 4;
-        case 'may':
-            return 5;
-        case 'june':
-            return 6;
-        case 'july':
-            return 7;
-        case 'august':
-            return 8;
-        case 'september':
-            return 9;
-        case 'october':
-            return 10;
-        case 'november':
-            return 11;
-        case 'december':
-            return 12;
-        default:
-            createNullTimestampObject('The month specified does not match formal params', err);
-    }
+    createValidObject(timestamp, timestampService.formatToMemonic(timestamp), success);
 }
 
 /**
@@ -120,17 +53,24 @@ function getNumericMonth(month, err){
   * @callback err the error callback passed in by timestampOut.route
   */
 function memonicFormat(timestamp, success, err) {
-    console.log('timestampOut is assumed memonic');
-    console.log('month segment ' + timestamp.substring(0, timestamp.indexOf(' ')).toLowerCase());
-    var month = getNumericMonth(timestamp.substring(0, timestamp.indexOf(' ')).toLowerCase(), err);
-    var year = timestamp.substring(timestamp.lastIndexOf(' '));
-    console.log('year: ' + year);
-    var day = timestamp.substring(timestamp.indexOf(' '), timestamp.indexOf(','));
-    console.log('day: ' + day);
-    var ts = (moment(day + '/' + month + '/' + year +' 00:00', 'D/M/YYYY H:mm').valueOf())/1000;
+    const date = buildMemonic(timestamp, err);
+    console.log('date: ' + date);
+    var ts = timestampService.formatToUnix(buildMemonic(timestamp, err));
     console.log('unix timestampOut: ' + ts);
-    console.log("Month is " + month);
+    if(isNaN(ts)){
+        createNullTimestampObject('The timestamp is invalid', err);
+        return;
+    }
+    //console.log("Month is " + month);
     createValidObject(ts, timestamp, success);
+}
+function buildMemonic(timestamp, err){
+    'use strict';
+    const month = timestampService.getMonth(timestamp);
+    if(month <= 0 || month >=13) createNullTimestampObject('The month specified is not valid', err);
+    const day = timestamp.substring(timestamp.indexOf(' '), timestamp.indexOf(','));
+    const year = timestamp.substring(timestamp.lastIndexOf(' ')).trim();
+    return day + '/' + month + '/' + year +' 00:00';
 }
 /**
   * This function will handle all of the initial logic for the timestampOut.
