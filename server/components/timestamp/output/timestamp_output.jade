@@ -1,10 +1,8 @@
 extends ../../shared/layout
 
 block content
-    .container
-        h1= title
-        if  hasErrors
-            p= errorMsg
-        pre { "unix": #{content.unix}, "natural": #{content.natural} }
-        include ../../shared/footer
+    if  hasErrors
+        p= errorMsg
+    pre.text-center { "unix": #{content.unix}, "natural": #{content.natural} }
+
 

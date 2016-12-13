@@ -20,7 +20,6 @@ router.get('/:stamp', function(req, res, next){
     }, function(err, obj){
         'use strict';
         console.log("failed :(", err);
-        //todo use promises instead of callbacks
         object.content = obj;
         object.hasErrors = true;
         object.errorMsg = err;

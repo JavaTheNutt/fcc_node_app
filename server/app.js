@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 //route files
-var index = require('./components/index/index.route'); //todo: uncomment and test
+var index = require('./components/index/index.route');
 var timestampOut = require('./components/timestamp/output/timestamp_output.route');
 const timestampIn = require('./components/timestamp/input/timestamp_input.route');
 
@@ -15,7 +15,7 @@ var app = express();
 const viewFolders = [
     path.join(__dirname, 'components/shared/'),
     path.join(__dirname, 'components/timestamp/output/'),
-    path.join(__dirname, 'components/index/'), //todo: uncomment and test
+    path.join(__dirname, 'components/index/'),
     path.join(__dirname, 'components/timestamp/input/')
 ];
 // view engine setup
@@ -31,7 +31,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 //define routes
-app.use('/', index); //todo: uncomment and test
+app.use('/', index);
 app.use('/timestamp/input', timestampIn);
 app.use('/timestamp/output', timestampOut);
 
