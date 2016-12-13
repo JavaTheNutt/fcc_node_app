@@ -1,5 +1,10 @@
 extends ../../shared/layout
+
 block content
-    h1= title
-    pre { "unix": #{content.unix}, "natural": #{content.natural} }
+    .container
+        h1= title
+        if  hasErrors
+            p= errorMsg
+        pre { "unix": #{content.unix}, "natural": #{content.natural} }
+        include ../../shared/footer
 

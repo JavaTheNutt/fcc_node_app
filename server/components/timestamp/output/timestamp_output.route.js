@@ -16,13 +16,16 @@ router.get('/:stamp', function(req, res, next){
         'use strict';
         console.log("success!!", data);
         object.content = data;
+        object.hasErrors = false;
     }, function(err, obj){
         'use strict';
         console.log("failed :(", err);
-        //fixme error not printing
         //todo use promises instead of callbacks
         object.content = obj;
+        object.hasErrors = true;
+        object.errorMsg = err;
     });
+    console.log("model object", object);
     res.render('timestamp_output', object);
 });
 
