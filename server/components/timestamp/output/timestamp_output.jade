@@ -1,8 +1,0 @@
-extends ../../shared/layout
-
-block content
-    if  hasErrors
-        p= errorMsg
-    pre.text-center { "unix": #{content.unix}, "natural": #{content.natural} }
-
-

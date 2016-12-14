@@ -1,5 +1,5 @@
 var moment = require('moment');
-const timestampService = require('./timestamp.service');
+const timestampService = require('./timestamp.service.js');
 var exports = module.exports = {};
 
 /**
@@ -53,21 +53,18 @@ function numericFormat(timestamp, success, err){
   * @callback err the error callback passed in by timestampOut.route
   */
 function memonicFormat(timestamp, success, err) {
-    const date = buildMemonic(timestamp, err);
-    console.log('date: ' + date);
     var ts = timestampService.formatToUnix(buildMemonic(timestamp, err));
     console.log('unix timestampOut: ' + ts);
     if(isNaN(ts)){
         createNullTimestampObject('The timestamp is invalid', err);
         return;
     }
-    //console.log("Month is " + month);
     createValidObject(ts, timestamp, success);
 }
 function buildMemonic(timestamp, err){
     'use strict';
     const month = timestampService.getMonth(timestamp);
-    if(month <= 0 || month >=13) createNullTimestampObject('The month specified is not valid', err);
+    if(month <= 0 || month >=13) return createNullTimestampObject('The month specified is not valid', err);
     const day = timestamp.substring(timestamp.indexOf(' '), timestamp.indexOf(','));
     const year = timestamp.substring(timestamp.lastIndexOf(' ')).trim();
     return day + '/' + month + '/' + year +' 00:00';

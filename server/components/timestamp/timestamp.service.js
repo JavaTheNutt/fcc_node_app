@@ -57,18 +57,9 @@ exports.formatToMemonic = function (timestamp) {
  * @returns {number}
  */
 exports.formatToUnix = function (timestamp) {
-    /*console.log('timestampOut is assumed memonic');
-    console.log('month segment ' + timestamp.substring(0, timestamp.indexOf(' ')).toLowerCase());
-    var month = getNumericMonth(timestamp.substring(0, timestamp.indexOf(' ')).toLowerCase());
-    var year = timestamp.substring(timestamp.lastIndexOf(' '));
-    console.log('year: ' + year);
-    var day = timestamp.substring(timestamp.indexOf(' '), timestamp.indexOf(','));
-    console.log('day: ' + day);
-    var ts = (moment(day + '/' + month + '/' + year +' 00:00', 'D/M/YYYY H:mm').valueOf())/1000;*/
     console.log('calling moment on timestamp', moment(timestamp, 'D/M/YYYY H:mm'));
     const ts = (moment(timestamp, 'D/M/YYYY H:mm').valueOf())/1000;
     console.log('unix timestampOut: ' + ts);
-    //console.log("Month is " + month);
     return ts;
 };
 exports.getMonth = function (timestamp) {

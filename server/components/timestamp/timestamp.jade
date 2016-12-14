@@ -1,0 +1,14 @@
+extends ../shared/layout
+block content
+    if isInput
+        p To test the timestamp service, append the timestamp to the URL. The timestamp appended to the URL must be either a valid unix timestamp (in seconds), or a date in the format of "memonic month day, year" such as "December 15, 2015". Here are some examples that will work:
+        ul
+            li 1450137600
+            li December 15, 2015
+        a(href="/timestamp/output/1450137600") test timestamp with unix
+        br
+        a(href="/timestamp/output/December%2015,%202015") test timestamp with memonic values
+    else
+        if  hasErrors
+            p= errorMsg
+        pre.text-center { "unix": #{content.unix}, "natural": #{content.natural} }
