@@ -5,9 +5,9 @@ block content
         ul
             li 1450137600
             li December 15, 2015
-        a(href="/timestamp/output/1450137600") test timestamp with unix
+        a(href="/timestamp?date=1450137600") test timestamp with unix
         br
-        a(href="/timestamp/output/December%2015,%202015") test timestamp with memonic values
+        a(href="/timestamp/?date=December%2015,%202015") test timestamp with memonic values
     else
         if  hasErrors
             p= errorMsg

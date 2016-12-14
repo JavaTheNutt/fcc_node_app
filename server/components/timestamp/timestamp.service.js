@@ -62,6 +62,11 @@ exports.formatToUnix = function (timestamp) {
     console.log('unix timestampOut: ' + ts);
     return ts;
 };
+/**
+ * Get the numeric month
+ * @param timestamp {string}
+ * @returns {number}
+ */
 exports.getMonth = function (timestamp) {
     return getNumericMonth(timestamp.substring(0, timestamp.indexOf(' ')).toLowerCase());
 };

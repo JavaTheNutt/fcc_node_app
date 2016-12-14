@@ -40,7 +40,6 @@ function numericFormat(timestamp, success, err){
     'use strict';
     if(!timestampService.isValidNumeric(timestamp)) return createNullTimestampObject('Timestamp must be a 10 digit numeric string if it does not contain spaces', err);
     console.log('timestampOut is valid numeric');
-
     createValidObject(timestamp, timestampService.formatToMemonic(timestamp), success);
 }
 
@@ -61,6 +60,14 @@ function memonicFormat(timestamp, success, err) {
     }
     createValidObject(ts, timestamp, success);
 }
+
+/**
+ * This function converts the memonic date into the format that moment expects
+ *
+ * @param timestamp {string} the timestamp
+ * @param err {function} the error callback
+ * @returns {*} the timestamp in the correct format, or throws the error callback
+ */
 function buildMemonic(timestamp, err){
     'use strict';
     const month = timestampService.getMonth(timestamp);
@@ -69,6 +76,7 @@ function buildMemonic(timestamp, err){
     const year = timestamp.substring(timestamp.lastIndexOf(' ')).trim();
     return day + '/' + month + '/' + year +' 00:00';
 }
+
 /**
   * This function will handle all of the initial logic for the timestampOut.
   * @param timestamp {string} the timestampOut
