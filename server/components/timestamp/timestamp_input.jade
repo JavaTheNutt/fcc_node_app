@@ -1,0 +1,21 @@
+p To test the timestamp service, append the timestamp to the URL. The timestamp appended to the URL must be either a valid unix timestamp (in seconds), or a date in the format of "memonic month day, year" such as "December 15, 2015". Here are some examples that will work:
+
+form(method='get', action='/timestamp')
+    .form-group
+        .col-sm-4.col-sm-offset-1.text-right
+            label.control-label(for="unixDate") Enter a date as a valid unix timestamp
+        .col-sm-6
+            input.form-control(type='text', required, id='unixDate', name='date', value='1450137600', minlength=7)
+
+    .text-center
+        button.btn.btn-primary Submit
+
+form(method='get', action='/timestamp')
+    .form-group
+        .col-sm-4.col-sm-offset-1.text-right
+            label.control-label(for="memonicDate") Enter a date as a valid memonic date
+        .col-sm-6
+            input.form-control(type='text', required, id='memonicDate', name='date', value='December 15, 2015', minlength=7)
+
+    .text-center
+        button.btn.btn-primary Submit
