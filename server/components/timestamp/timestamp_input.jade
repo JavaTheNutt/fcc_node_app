@@ -6,16 +6,20 @@ form(method='get', action='/timestamp')
             label.control-label(for="unixDate") Enter a date as a valid unix timestamp
         .col-sm-6
             input.form-control(type='number', required, id='unixDate', name='date', value='1450137600', max=9999999999)
-
     .text-center
         button.btn.btn-primary Submit
-
+        //fixme date-picker not working
 form(method='get', action='/timestamp')
     .form-group
         .col-sm-4.col-sm-offset-1.text-right
             label.control-label(for="memonicDate") Enter a date as a valid memonic date
-        .col-sm-6
-            input.form-control(type='text', required, id='memonicDate', name='date', value='December 15, 2015', minlength=7)
+    #datepicker.input-daterange.input-group
+        input#memonicDate.input-sm.form-control(type='text', name='start', placeholder='Date 1')
+        span.input-group-addon to
+        input#EndDate.input-sm.form-control(type='text', name='end', placeholder='Date 2')
+        span.input-group-btn
+            button.btn.btn-default.btn-sm(type='button', style='margin-left:8px;')
+                i.fa.fa-refresh
 
     .text-center
         button.btn.btn-primary Submit
