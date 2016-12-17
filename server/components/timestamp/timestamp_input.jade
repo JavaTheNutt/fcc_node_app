@@ -1,25 +1,26 @@
 p To test the timestamp service, append the timestamp to the URL. The timestamp appended to the URL must be either a valid unix timestamp (in seconds), or a date in the format of "memonic month day, year" such as "December 15, 2015". Here are some examples that will work:
-
-form(method='get', action='/timestamp')
-    .form-group
-        .col-sm-4.col-sm-offset-1.text-right
-            label.control-label(for="unixDate") Enter a date as a valid unix timestamp
-        .col-sm-6
-            input.form-control(type='number', required, id='unixDate', name='date', value='1450137600', max=9999999999)
-    .text-center
-        button.btn.btn-primary Submit
-        //fixme date-picker not working
-form(method='get', action='/timestamp')
-    .form-group
-        .col-sm-4.col-sm-offset-1.text-right
-            label.control-label(for="memonicDate") Enter a date as a valid memonic date
-    #datepicker.input-daterange.input-group
-        input#memonicDate.input-sm.form-control(type='text', name='start', placeholder='Date 1')
-        span.input-group-addon to
-        input#EndDate.input-sm.form-control(type='text', name='end', placeholder='Date 2')
-        span.input-group-btn
-            button.btn.btn-default.btn-sm(type='button', style='margin-left:8px;')
-                i.fa.fa-refresh
-
-    .text-center
-        button.btn.btn-primary Submit
+.row
+    .toggleFormGroup.col-sm-4.col-sm-offset-2
+        button#toggleForm.btn.btn-success Toggle form
+.row
+    form#numericForm(method='get', action='/timestamp')
+        .form-group
+            .col-sm-4.col-sm-offset-1.text-right
+                label.control-label(for="unixDate") Enter a date as a valid unix timestamp
+            .col-sm-6
+                input#unixDate.form-control(type='number', required, name='date', value='1450137600', max=9999999999, min=0)
+        .text-center
+            button#submitNumeric.btn.btn-primary(type='button') Submit
+            button#submitUnix.hidden(type='submit')
+            //fixme date-picker not working
+.row
+    form#memonicForm.hidden(method='get', action='/timestamp')
+        .form-group
+            .col-sm-4.col-sm-offset-1.text-right
+                label.control-label(for="memonicDate") Enter a date as a valid memonic date
+            #timestampDatepicker.input-group.date(data-provide='datepicker-inline')
+                input#memonicDate.form-control(type='text', minlength='7')
+                .input-group-addon
+                    span.glyphicon.glyphicon-th
+        .text-center
+            button#submitMemonic.btn.btn-primary(type='button') Submit
