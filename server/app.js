@@ -4,6 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+const logger = require('./util/logger');
+const dotenv = require('dotenv').config();
 
 //route files
 var index = require('./components/index/index.route');

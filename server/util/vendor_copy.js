@@ -1,6 +1,10 @@
 const fs = require('fs-extra');
 const path = require('path');
+const winston = require('winston');
 
+winston.level = process.env.LOG_LEVEL || 'error';
+
+winston.info('logger level: %s', process.env.LOG_LEVEL);
 const srcRootPath = 'node_modules/';
 const destRootPath = './server/public/vendor/';
 
@@ -22,6 +26,7 @@ fonts.forEach(copyDir);
 
 function copyDir(dirPath){
     'use strict';
+    winston.info('Copy Dir called for ' + dirPath);
     const dirName = dirPath.substring(dirPath.lastIndexOf('\\') + 1);
     const destPath = destRootPath + dirName;
     console.log(destPath);
@@ -29,21 +34,23 @@ function copyDir(dirPath){
 }
 function copyFile(filePath){
     'use strict';
+    winston.info('copying file %s', filePath);
     const dir = filePath.substring(filePath.length - 2) === 'js' ? 'js/': 'css/';
-    console.log(dir);
+    winston.info('directory name: %s', dir);
     const fileName = filePath.substring(filePath.lastIndexOf('\\') + 1);
     const destPath = destRootPath + dir + fileName;
-    console.log(destPath);
+    winston.info('full destination path %s', destPath);
     performCopy(filePath, destPath);
 }
 function performCopy(srcPath, destPath){
     'use strict';
+    winston.info('performing copy from %s to %s', srcPath, destPath);
     console.log('performing copy from ' + srcPath + ' to ' + destPath);
     fs.copy(srcPath, destPath, function (err) {
         if(err){
-            console.log(err);
+            winston.error('An error has occurred.', err);
         }else{
-            console.log('success');
+            winston.info('file copied successfully');
         }
     })
 }
