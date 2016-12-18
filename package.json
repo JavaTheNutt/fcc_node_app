@@ -4,7 +4,8 @@
   "private": true,
   "main": "app.js",
   "scripts": {
-    "start": "node ./server/bin/www"
+    "start": "node ./server/bin/www",
+    "copy": "node ./server/util/vendor_copy"
   },
   "dependencies": {
     "body-parser": "~1.15.2",
@@ -32,5 +33,9 @@
   "homepage": "https://github.com/JavaTheNutt/fcc_node_app#readme",
   "bugs": {
     "url": "https://github.com/JavaTheNutt/fcc_node_app/issues"
+  },
+  "devDependencies": {
+    "fs": "0.0.1-security",
+    "fs-extra": "^1.0.0"
   }
 }
