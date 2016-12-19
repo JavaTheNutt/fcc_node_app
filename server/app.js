@@ -1,12 +1,13 @@
+
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-const logger = require('./util/logger');
-const dotenv = require('dotenv').config();
 
+const log = require('./util/logger');
 //route files
 var index = require('./components/index/index.route');
 
@@ -22,7 +23,6 @@ const viewFolders = [
 // view engine setup
 app.set('views', viewFolders);
 app.set('view engine', 'jade');
-
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));

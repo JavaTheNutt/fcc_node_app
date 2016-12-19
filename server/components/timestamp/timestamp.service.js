@@ -30,7 +30,6 @@ function getNumericMonth(month){
  */
 exports.isValidNumeric = function (timestamp) {
     'use strict';
-    console.log('checking if ' + timestamp +' is a valid 10 digit numeric timestampOut');
     //todo: refine regex
     var numericRegex = /^\d{10}$/;
     return numericRegex.test(timestamp);
@@ -46,8 +45,6 @@ exports.formatToMemonic = function (timestamp) {
     //todo: uncomment and test using moment to parse the timestampOut
     //var natural = moment.unix(timestampOut);
     var naturalMoment = moment(natural);
-    console.log('natural: ' + natural);
-    console.log('naturalMoment: ' + naturalMoment);
     return naturalMoment.format('MMMM Do, YYYY');
 };
 
@@ -57,9 +54,7 @@ exports.formatToMemonic = function (timestamp) {
  * @returns {number}
  */
 exports.formatToUnix = function (timestamp) {
-    console.log('calling moment on timestamp', moment(timestamp, 'D/M/YYYY H:mm'));
     const ts = (moment(timestamp, 'D/M/YYYY H:mm').valueOf())/1000;
-    console.log('unix timestampOut: ' + ts);
     return ts;
 };
 /**

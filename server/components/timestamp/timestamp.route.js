@@ -4,7 +4,7 @@
 const express = require('express');
 const router  = express.Router();
 const timestampService = require('./timestamp');
-
+const log = require('../../util/logger');
 /**
  * This will be the model that will be used to get the data into the view
  * @type {{title: string}}
@@ -31,8 +31,7 @@ router.get('/', function (req, res, next) {
  * @param next next piece of middleware
  */
 function route(req, res, next) {
-    console.log('request received by timestamp service');
-    console.log(req.query);
+    log.info('request received by timestamp service');
     //if the date param is present, show the output. Otherwise show input
     req.query.hasOwnProperty('date') ? getOutputData(req.query.date, res): renderInput(res);
 }
@@ -44,7 +43,7 @@ function route(req, res, next) {
  * @param res the response
  */
 function getOutputData(timestamp, res) {
-    console.log('parsing: ' + timestamp);
+    log.info('parsing: ' + timestamp);
     model.isInput = false;
     timestampService.getTimeObject(timestamp, function (timeObject) {
         timestampConversionSuccessful(timeObject, res);
@@ -61,6 +60,7 @@ function getOutputData(timestamp, res) {
  */
 function timestampConversionSuccessful(timeObject, res){
     'use strict';
+    log.info('timestamp conversion successful, rendering output');
     model.hasErrors = false;
     model.content = timeObject;
     renderOutput(res)
@@ -75,6 +75,7 @@ function timestampConversionSuccessful(timeObject, res){
  */
 function timestampConversionFailed(err, timeObject, res) {
     'use strict';
+    log.info('timestamp conversion failed, rendering error');
     model.hasErrors = true;
     model.errorMsg = err;
     model.content = timeObject;
@@ -88,7 +89,6 @@ function timestampConversionFailed(err, timeObject, res) {
  */
 function renderOutput(res){
     'use strict';
-    console.log('render output called with this model: ' + JSON.parse(JSON.stringify(model)));
     res.render('timestamp', model);
 }
 
@@ -99,7 +99,6 @@ function renderOutput(res){
  */
 function renderInput(res){
     'use strict';
-    console.log('render input called with this model: ' + JSON.parse(JSON.stringify(model.isInput)));
     res.render('timestamp', model);
 }
 

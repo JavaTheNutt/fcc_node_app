@@ -1,5 +1,6 @@
 var moment = require('moment');
 const timestampService = require('./timestamp.service.js');
+const log = require('../../util/logger');
 var exports = module.exports = {};
 
 /**
@@ -10,7 +11,7 @@ var exports = module.exports = {};
   */
 function createNullTimestampObject(error, errorCallback){
     'use strict';
-    if(error) console.log(error);
+    if(error) log.error(error);
     errorCallback(error, {
         "unix": "null",
         "natural": "null"
@@ -39,7 +40,7 @@ function createValidObject(unix, natural, success) {
 function numericFormat(timestamp, success, err){
     'use strict';
     if(!timestampService.isValidNumeric(timestamp)) return createNullTimestampObject('Timestamp must be a 10 digit numeric string if it does not contain spaces', err);
-    console.log('timestampOut is valid numeric');
+    log.info('timestampOut is valid numeric');
     createValidObject(timestamp, timestampService.formatToMemonic(timestamp), success);
 }
 
@@ -53,8 +54,9 @@ function numericFormat(timestamp, success, err){
   */
 function memonicFormat(timestamp, success, err) {
     var ts = timestampService.formatToUnix(buildMemonic(timestamp, err));
-    console.log('unix timestampOut: ' + ts);
+    log.info('unix timestampOut: ' + ts);
     if(isNaN(ts)){
+        log.warning('returned timestamp is NaN');
         createNullTimestampObject('The timestamp is invalid', err);
         return;
     }
@@ -87,11 +89,11 @@ function buildMemonic(timestamp, err){
   */
 function isValidTimestamp(timestamp, success, err){
     'use strict';
-    console.log('checking: ', timestamp);
+    log.info('checking: ', timestamp);
     if(timestamp.split(' ').length == 1){
         numericFormat(timestamp, success, err);
     }else{
-        console.log('contains spaces');
+        log.info('contains spaces');
         memonicFormat(timestamp, success, err);
     }
 }
@@ -106,7 +108,7 @@ function isValidTimestamp(timestamp, success, err){
   */
 exports.getTimeObject = function getTimeObject(timestamp, success, err) {
     'use strict';
-    console.log('recieved request to check: ' + timestamp);
+    log.info('recieved request to check: ' + timestamp);
     isValidTimestamp(timestamp, success, err);
 };
 

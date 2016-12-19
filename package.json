@@ -4,8 +4,8 @@
   "private": true,
   "main": "app.js",
   "scripts": {
-    "start": "LOG_LEVEL=debug node ./server/bin/www",
-    "copy": "node ./server/util/vendor_copy LOG_LEVEL='debug'"
+    "start": "node ./server/bin/www",
+    "copy": "node ./server/util/vendor_copy"
   },
   "dependencies": {
     "body-parser": "~1.15.2",

@@ -1,3 +1,5 @@
+const dotenv = require('dotenv');
+dotenv.load();
 const winston = require('winston');
 winston.level = process.env.LOG_LEVEL || 'error';
 winston.remove(winston.transports.Console);
