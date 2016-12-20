@@ -17,7 +17,7 @@ const vendorCss = [
     path.join(srcRootPath, 'bootstrap/dist/css/bootstrap-theme.css'),
     path.join(srcRootPath, 'font-awesome/css/font-awesome.css')
 ];
-const fonts = [path.join(srcRootPath, 'font-awesome/fonts')];
+const fonts = [path.join(srcRootPath, 'font-awesome/fonts'), path.join(srcRootPath, 'bootstrap/fonts')];
 
 vendorJS.forEach(copyFile);
 vendorCss.forEach(copyFile);

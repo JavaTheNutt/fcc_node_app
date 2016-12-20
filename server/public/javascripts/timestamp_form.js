@@ -18,7 +18,7 @@ function toggleForms(e){
     $('#memonicForm').toggleClass('hidden');
 }
 $(document).ready(function () {
-    $('#timestampDatePicker').datepicker();
+    $('#memonicDate').datepicker();
     $('#submitMemonic').click(submitMemonicClicked);
     $('#submitNumeric').click(submitNumericClicked);
     $('#toggleForm').click(toggleForms);
