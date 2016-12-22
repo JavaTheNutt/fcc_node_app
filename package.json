@@ -16,6 +16,7 @@
     "dotenv": "^2.0.0",
     "express": "~4.14.0",
     "font-awesome": "^4.7.0",
+    "fs-extra": "^1.0.0",
     "jade": "~1.11.0",
     "jquery": "^3.1.1",
     "jquery-ui-dist": "^1.12.1",
@@ -37,9 +38,5 @@
   "homepage": "https://github.com/JavaTheNutt/fcc_node_app#readme",
   "bugs": {
     "url": "https://github.com/JavaTheNutt/fcc_node_app/issues"
-  },
-  "devDependencies": {
-    "fs": "0.0.1-security",
-    "fs-extra": "^1.0.0"
   }
 }
