@@ -29,7 +29,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-//app.use('/scripts', express.static(path.join(__dirname, '../node')))
+app.use('/vendor', express.static(path.join(__dirname, 'public/vendor')));
 
 //define routes
 app.use('/', index);
