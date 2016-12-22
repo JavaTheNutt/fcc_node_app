@@ -33,6 +33,8 @@ function copyDir(dirPath){
     //console.log(destPath);
     performCopy(dirPath, destPath);
 }
+
+//fixme do not have write access on heroku. Folders must exist already
 function copyFile(filePath){
     'use strict';
     log.info('copying file %s', filePath);
