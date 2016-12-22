@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "node ./server/bin/www",
-    "copy": "node ./server/util/vendor_copy"
+    "copy": "node ./server/util/vendor_copy",
+    "heroku-prebuild": "npm run copy"
   },
   "dependencies": {
     "body-parser": "~1.15.2",
