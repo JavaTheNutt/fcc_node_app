@@ -36,6 +36,7 @@ function copyDir(dirPath){
 function copyFile(filePath){
     'use strict';
     log.info('copying file %s', filePath);
+    log.info('the index of \'node_modules\' is %s', filePath.indexOf('node_modules'));
     if(filePath.indexOf('node_modules') !== -1){
         filePath = filePath.substring(filePath.indexOf('node_modules'));
         log.info(filePath);
