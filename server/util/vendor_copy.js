@@ -9,10 +9,11 @@ const destRootPath = './server/public/vendor/';
 
 const vendorJS = [
     path.join(srcRootPath, 'jquery/dist/jquery.js'),
-    path.join(srcRootPath, 'jquery-ui/build/release.js'),
+    path.join(srcRootPath, 'jquery-ui-dist/jquery-ui.js'),
     path.join(srcRootPath, 'bootstrap/dist/js/bootstrap.js')
 ];
 const vendorCss = [
+    path.join(srcRootPath, 'normalize.css'),
     path.join(srcRootPath, 'bootstrap/dist/css/bootstrap.css'),
     path.join(srcRootPath, 'bootstrap/dist/css/bootstrap-theme.css'),
     path.join(srcRootPath, 'font-awesome/css/font-awesome.css')
@@ -45,13 +46,19 @@ function performCopy(srcPath, destPath){
     'use strict';
     log.info('performing copy from %s to %s', srcPath, destPath);
     //console.log('performing copy from ' + srcPath + ' to ' + destPath);
-    fs.copy(srcPath, destPath, function (err) {
-        if(err){
+    fs.copy(srcPath, destPath, (err) => {
+        if(err)
             log.error('An error has occurred.', err);
-        }else{
+        else
             log.info('file copied successfully');
-        }
     })
 }
+
+function buildNormalizePath(){
+    'use strict';
+    let outerDir = path.dirname(path.join(srcRootPath, 'normalize.css'));
+    log.info('normalize path: %s ',  path);
+}
+//buildNormalizePath();
 
 

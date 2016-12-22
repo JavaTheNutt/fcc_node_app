@@ -1,19 +1,18 @@
-
-
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+'use strict'
+const express = require('express');
+const path = require('path');
+const favicon = require('serve-favicon');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 
 const log = require('./util/logger');
 //route files
-var index = require('./components/index/index.route');
+const index = require('./components/index/index.route');
 
 const timestamp = require('./components/timestamp/timestamp.route');
 
-var app = express();
+const app = express();
 //folders containing view files
 const viewFolders = [
     path.join(__dirname, 'components/shared/'),
@@ -39,7 +38,7 @@ app.use('/timestamp', timestamp);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
+  let err = new Error('Not Found');
   err.status = 404;
   next(err);
 });

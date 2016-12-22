@@ -18,7 +18,11 @@ function toggleForms(e){
     $('#memonicForm').toggleClass('hidden');
 }
 $(document).ready(function () {
-    $('#memonicDate').datepicker();
+    $('#memonicDate').datepicker({
+        inline : true,
+        showOtherMonths: true,
+        dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+                                 });
     $('#submitMemonic').click(submitMemonicClicked);
     $('#submitNumeric').click(submitNumericClicked);
     $('#toggleForm').click(toggleForms);
