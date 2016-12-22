@@ -53,6 +53,8 @@ function numericFormat(timestamp, success, err){
   * @callback err the error callback passed in by timestampOut.route
   */
 function memonicFormat(timestamp, success, err) {
+    timestamp = timestamp.charAt(0).toUpperCase() + timestamp.substring(1).toLowerCase();
+    log.info('Capitalized timestamp: ', timestamp);
     var ts = timestampService.formatToUnix(buildMemonic(timestamp, err));
     log.info('unix timestampOut: ' + ts);
     if(isNaN(ts)){

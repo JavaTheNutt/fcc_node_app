@@ -4,7 +4,31 @@
  */
 function submitMemonicClicked() {
     'use strict';
-    console.log('submit memonic clicked');
+    $('#memonicDateStore').val(convertTimestamp($('#memonicDate').val()));
+    $('#submitDate').click();
+}
+function convertTimestamp(timestamp){
+    'use strict';
+    var splitTimestamp = timestamp.split('/');
+    return  getMonthName(splitTimestamp[0]) + ' ' + splitTimestamp[1] + ', ' + splitTimestamp[2];
+}
+function getMonthName(month){
+    'use strict';
+    var months = [
+        'january',
+        'february',
+        'march',
+        'april',
+        'may',
+        'june',
+        'july',
+        'august',
+        'september',
+        'october',
+        'november',
+        'december'
+    ];
+    return months[month - 1];
 }
 function submitNumericClicked(){
     'use strict';
@@ -17,7 +41,9 @@ function toggleForms(e){
     $('#numericForm').toggleClass('hidden');
     $('#memonicForm').toggleClass('hidden');
 }
+
 $(document).ready(function () {
+    'use strict';
     $('#memonicDate').datepicker({
         inline : true,
         showOtherMonths: true,

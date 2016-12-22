@@ -12,7 +12,7 @@ p To test the timestamp service, append the timestamp to the URL. The timestamp 
         .text-center
             button#submitNumeric.btn.btn-primary(type='button') Submit
             button#submitUnix.hidden(type='submit')
-            //fixme date-picker not working
+
 .row
     form#memonicForm.hidden(method='get', action='/timestamp')
         .form-group
@@ -22,5 +22,7 @@ p To test the timestamp service, append the timestamp to the URL. The timestamp 
                 input#memonicDate.form-control(type='text', minlength='7')
                 .input-group-addon
                     span.glyphicon.glyphicon-th
+        input.hidden(type="text", name="date", id="memonicDateStore")
         .text-center
             button#submitMemonic.btn.btn-primary(type='button') Submit
+            button#submitDate.hidden(type="submit")
