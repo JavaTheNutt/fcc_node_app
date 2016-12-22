@@ -38,7 +38,7 @@ function copyFile(filePath){
     log.info('copying file %s', filePath);
     log.info('the index of \'node_modules\' is %s', filePath.indexOf('node_modules'));
     if(filePath.indexOf('node_modules') !== -1){
-        filePath = filePath.substring(filePath.indexOf('node_modules'));
+        filePath = filePath.substring(filePath.indexOf('node_modules') + 'node_modules'.length);
         log.info(filePath);
     }
     const dir = filePath.substring(filePath.length - 2) === 'js' ? 'js/': 'css/';
