@@ -36,7 +36,12 @@ function copyDir(dirPath){
 function copyFile(filePath){
     'use strict';
     log.info('copying file %s', filePath);
+    if(filePath.indexOf('node_modules') !== -1){
+        filePath = filePath.substring(filePath.indexOf('node_modules'));
+        log.info(filePath);
+    }
     const dir = filePath.substring(filePath.length - 2) === 'js' ? 'js/': 'css/';
+
     log.info('directory name: %s', dir);
     const fileName = filePath.substring(filePath.lastIndexOf('\\') + 1);
     const destPath = destRootPath + dir + fileName;
