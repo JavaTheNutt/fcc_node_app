@@ -37,15 +37,17 @@ function copyFile(filePath){
     'use strict';
     log.info('copying file %s', filePath);
     log.info('the index of \'node_modules\' is %s', filePath.indexOf('node_modules'));
-    if(filePath.indexOf('node_modules') !== -1){
-        filePath = filePath.substring(filePath.indexOf('node_modules') + 'node_modules'.length);
-        log.info(filePath);
-    }
+
     const dir = filePath.substring(filePath.length - 2) === 'js' ? 'js/': 'css/';
 
     log.info('directory name: %s', dir);
     const fileName = filePath.substring(filePath.lastIndexOf('\\') + 1);
-    const destPath = destRootPath + dir + fileName;
+    let destPath = destRootPath + dir + fileName;
+    if(destPath.indexOf('node_modules') !== -1){
+        log.info('removing \'node_modules\' from %s', destPath);
+        destPath = destPath.substring(destPath.indexOf('node_modules') + 'node_modules'.length);
+        log.info('dest path is now %s', destPath);
+    }
     log.info('full destination path %s', destPath);
     performCopy(filePath, destPath);
 }
