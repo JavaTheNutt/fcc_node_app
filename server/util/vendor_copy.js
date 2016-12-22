@@ -48,6 +48,11 @@ function copyFile(filePath){
         destPath = destPath.substring(destPath.indexOf('node_modules') + 'node_modules'.length);
         log.info('dest path is now %s', destPath);
     }
+    if(destPath.indexOf(dir) !== 0){
+        log.info('removing vendor name from %s', destPath);
+        destPath = destPath.substring(destPath.indexOf(dir) -1);
+        log.info('dest path is now %s', destPath);
+    }
     log.info('full destination path %s', destPath);
     performCopy(filePath, destPath);
 }
