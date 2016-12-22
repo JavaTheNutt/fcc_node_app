@@ -4,6 +4,7 @@ const path = require('path');
 const log = require('./logger');
 
 
+
 const srcRootPath = 'node_modules/';
 const destRootPath = './server/public/vendor/';
 
