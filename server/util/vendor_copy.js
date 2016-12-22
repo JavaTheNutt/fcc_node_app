@@ -47,7 +47,7 @@ function copyFile(filePath){
     const fileName = filePath.substring(filePath.lastIndexOf('\\') + 1);
     let destPath = destRootPath + dir + fileName;
     //remove node_modules from path
-    if(destPath.indexOf('node_modules') !== -1){
+    /*if(destPath.indexOf('node_modules') !== -1){
         log.info('removing \'node_modules\' from %s', destPath);
         destPath = destPath.substring(destPath.indexOf('node_modules') + 'node_modules'.length);
         log.info('dest path is now %s', destPath);
@@ -57,7 +57,8 @@ function copyFile(filePath){
         log.info('removing vendor: %s from %s', dir, destPath);
         destPath = destPath.substring(destPath.indexOf(dir) -1);
         log.info('dest path is now %s', destPath);
-    }
+    }*/
+    destPath = cleanPath(destPath, )
     log.info('full destination path %s', destPath);
     performCopy(filePath, destPath);
 }
