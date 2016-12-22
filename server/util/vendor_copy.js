@@ -28,6 +28,7 @@ fonts.forEach(copyDir);
 function copyDir(dirPath){
     'use strict';
     log.info('Copy Dir called for ' + dirPath);
+
     const dirName = dirPath.substring(dirPath.lastIndexOf('\\') + 1);
     const destPath = destRootPath + dirName;
     //console.log(destPath);
@@ -45,18 +46,36 @@ function copyFile(filePath){
     log.info('directory name: %s', dir);
     const fileName = filePath.substring(filePath.lastIndexOf('\\') + 1);
     let destPath = destRootPath + dir + fileName;
+    //remove node_modules from path
     if(destPath.indexOf('node_modules') !== -1){
         log.info('removing \'node_modules\' from %s', destPath);
         destPath = destPath.substring(destPath.indexOf('node_modules') + 'node_modules'.length);
         log.info('dest path is now %s', destPath);
     }
+    //remove directory name from path
     if(destPath.indexOf(dir) !== 0){
-        log.info('removing vendor name from %s', destPath);
+        log.info('removing vendor: %s from %s', dir, destPath);
         destPath = destPath.substring(destPath.indexOf(dir) -1);
         log.info('dest path is now %s', destPath);
     }
     log.info('full destination path %s', destPath);
     performCopy(filePath, destPath);
+}
+function cleanPath(destPath, vendor){
+    'use strict';
+    //remove node_modules from path
+    if(destPath.indexOf('node_modules') !== -1){
+        log.info('removing \'node_modules\' from %s', destPath);
+        destPath = destPath.substring(destPath.indexOf('node_modules') + 'node_modules'.length);
+        log.info('dest path is now %s', destPath);
+    }
+    //remove directory name from path
+    if(destPath.indexOf(vendor) !== 0){
+        log.info('removing vendor name from %s', destPath);
+        destPath = destPath.substring(destPath.indexOf(vendor) -1);
+        log.info('dest path is now %s', destPath);
+    }
+    return destPath;
 }
 function performCopy(srcPath, destPath){
     'use strict';
