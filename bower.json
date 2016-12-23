@@ -1,0 +1,26 @@
+{
+  "name": "fcc-api-developement",
+  "description": "this is the project holding all of my api development projects for FCC",
+  "main": "app.js",
+  "authors": [
+    "Joe Wemyss"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/JavaTheNutt/fcc_node_app",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "server/public/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.1.1",
+    "bootstrap": "^3.3.7",
+    "jquery-ui": "^1.12.1",
+    "normalize-css": "normalize.css#^5.0.0",
+    "font-awesome": "^4.7.0"
+  }
+}
