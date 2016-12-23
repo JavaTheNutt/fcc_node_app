@@ -46,19 +46,9 @@ function copyFile(filePath){
     log.info('directory name: %s', dir);
     const fileName = filePath.substring(filePath.lastIndexOf('\\') + 1);
     let destPath = destRootPath + dir + fileName;
-    //remove node_modules from path
-    /*if(destPath.indexOf('node_modules') !== -1){
-        log.info('removing \'node_modules\' from %s', destPath);
-        destPath = destPath.substring(destPath.indexOf('node_modules') + 'node_modules'.length);
-        log.info('dest path is now %s', destPath);
-    }
-    //remove directory name from path
-    if(destPath.indexOf(dir) !== 0){
-        log.info('removing vendor: %s from %s', dir, destPath);
-        destPath = destPath.substring(destPath.indexOf(dir) -1);
-        log.info('dest path is now %s', destPath);
-    }*/
-    destPath = cleanPath(destPath, )
+
+
+    destPath = cleanPath(destPath, dir);
     log.info('full destination path %s', destPath);
     performCopy(filePath, destPath);
 }

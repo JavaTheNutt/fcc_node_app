@@ -2,7 +2,5 @@
 /.idea/
 npm-debug.log
 
-vendor/css/*.css
-vendor/fonts/*.*
-vendor/js/*.js
+vendor
 *.env
