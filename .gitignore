@@ -1,6 +1,7 @@
 /node_modules/
 /.idea/
 npm-debug.log
-
+/server/dist
+/server/.tmp
 vendor
 *.env
